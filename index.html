@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PawTracker Pro - Full Version</title>
+    <title>PawHealth Pro - Full Version</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -15,8 +15,6 @@
             --light: #f8f9fa;
             --dark: #212529;
             --gray: #6c757d;
-            --light-blue: #caf0f8;
-            --light-pink: #ffd6ff;
             --gold: #ffd166;
             --shadow: 0 4px 25px rgba(0,0,0,0.1);
             --radius: 20px;
@@ -129,25 +127,24 @@
             cursor: pointer;
             box-shadow: var(--shadow);
             transition: var(--transition);
+            position: relative;
         }
         
         .profile:hover {
             transform: scale(1.1);
         }
         
-        /* Premium badge */
         .premium-badge {
             position: absolute;
-            top: -10px;
-            right: -10px;
+            top: -8px;
+            right: -8px;
             background: var(--gold);
             color: #8a6500;
-            font-size: 12px;
-            padding: 4px 12px;
+            font-size: 10px;
+            padding: 3px 8px;
             border-radius: 20px;
             font-weight: bold;
-            box-shadow: 0 4px 10px rgba(255, 209, 102, 0.4);
-            transform: rotate(15deg);
+            box-shadow: 0 2px 8px rgba(255, 209, 102, 0.4);
         }
         
         /* Pet Profile */
@@ -164,6 +161,7 @@
             backdrop-filter: blur(5px);
             border: 2px solid rgba(255, 255, 255, 0.5);
             position: relative;
+            cursor: pointer;
         }
         
         .pet-avatar {
@@ -239,6 +237,85 @@
             align-items: center;
             gap: 8px;
             margin-top: 10px;
+        }
+        
+        /* Pet Profile Form */
+        .profile-form {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: var(--radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            display: none;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 12px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+        
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        
+        .form-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #3a56d4;
+            transform: translateY(-3px);
+        }
+        
+        .btn-secondary {
+            background: #e9ecef;
+            color: var(--dark);
+        }
+        
+        .btn-secondary:hover {
+            background: #dde0e4;
         }
         
         /* Features Grid */
@@ -375,6 +452,7 @@
             animation: slideIn 0.6s ease-out;
             backdrop-filter: blur(5px);
             border: 2px solid rgba(255, 255, 255, 0.5);
+            display: none;
         }
         
         .dashboard-header {
@@ -397,6 +475,22 @@
             border-radius: 20px;
             font-size: 14px;
             font-weight: 600;
+        }
+        
+        .close-btn {
+            background: #e9ecef;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .close-btn:hover {
+            background: #dde0e4;
         }
         
         .dashboard-stats {
@@ -477,6 +571,7 @@
             animation: slideIn 0.6s ease-out;
             backdrop-filter: blur(5px);
             border: 2px solid rgba(255, 255, 255, 0.5);
+            display: none;
         }
         
         .water-counter {
@@ -569,6 +664,7 @@
             margin-bottom: 25px;
             backdrop-filter: blur(5px);
             border: 2px solid rgba(255, 255, 255, 0.5);
+            display: none;
         }
         
         .map-placeholder {
@@ -671,6 +767,7 @@
             margin-bottom: 25px;
             backdrop-filter: blur(5px);
             border: 2px solid rgba(255, 255, 255, 0.5);
+            display: none;
         }
         
         .symptom-options {
@@ -745,8 +842,8 @@
             gap: 10px;
         }
         
-        /* New Features Section */
-        .new-features {
+        /* Food Tracker */
+        .food-tracker {
             background: rgba(255, 255, 255, 0.9);
             border-radius: var(--radius);
             padding: 25px;
@@ -754,34 +851,59 @@
             margin-bottom: 25px;
             backdrop-filter: blur(5px);
             border: 2px solid rgba(255, 255, 255, 0.5);
+            display: none;
         }
         
-        .features-list {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+        .food-log {
             margin-top: 20px;
         }
         
-        .feature-item {
+        .food-item {
             display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 15px;
-            background: rgba(255, 209, 102, 0.1);
-            border-radius: 16px;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
         }
         
-        .feature-item i {
-            width: 45px;
-            height: 45px;
-            border-radius: 12px;
-            background: var(--gold);
-            color: #8a6500;
+        .food-info h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+        
+        .food-info p {
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        .food-calories {
+            font-weight: bold;
+            color: var(--primary);
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 20px;
+        }
+        
+        .add-food {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .add-food input {
+            flex: 1;
+            padding: 12px 15px;
+            border-radius: 12px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+        
+        .add-food button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 12px;
+            cursor: pointer;
         }
         
         /* Animations */
@@ -815,8 +937,7 @@
             .features-grid, 
             .dashboard-stats,
             .walk-stats,
-            .symptom-options,
-            .features-list {
+            .symptom-options {
                 grid-template-columns: 1fr;
             }
             
@@ -846,7 +967,7 @@
                 <div class="logo-icon">
                     <i class="fas fa-crown"></i>
                 </div>
-                <div class="logo-text">PawTracker Pro</div>
+                <div class="logo-text">PawHealth Pro</div>
             </div>
             <div class="profile">
                 <i class="fas fa-user"></i>
@@ -855,24 +976,24 @@
         </div>
         
         <!-- Pet Profile -->
-        <div class="pet-profile">
+        <div class="pet-profile" id="petProfileSection">
             <div class="pet-avatar">
                 <i class="fas fa-dog"></i>
             </div>
             <div class="pet-info">
-                <h2>Rocky</h2>
-                <div class="pet-breed">German Shepherd</div>
+                <h2 id="petName">Rocky</h2>
+                <div class="pet-breed" id="petBreed">German Shepherd</div>
                 <div class="pet-stats">
                     <div class="stat-item">
-                        <div class="stat-value">2.5</div>
+                        <div class="stat-value" id="petAge">2.5</div>
                         <div class="stat-label">Years</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-value">62</div>
+                        <div class="stat-value" id="petWeight">62</div>
                         <div class="stat-label">Lbs</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-value">#1</div>
+                        <div class="stat-value" id="petRank">#1</div>
                         <div class="stat-label">Rank</div>
                     </div>
                 </div>
@@ -883,13 +1004,61 @@
             </div>
         </div>
         
+        <!-- Pet Profile Form -->
+        <div class="profile-form" id="profileForm">
+            <h2 class="section-title">
+                <i class="fas fa-dog"></i>
+                Pet Profile
+            </h2>
+            
+            <div class="form-group">
+                <label for="petNameInput">Pet Name</label>
+                <input type="text" id="petNameInput" placeholder="Enter pet name">
+            </div>
+            
+            <div class="form-group">
+                <label for="petBreedInput">Breed</label>
+                <input type="text" id="petBreedInput" placeholder="Enter breed">
+            </div>
+            
+            <div class="form-group">
+                <label for="petAgeInput">Age (years)</label>
+                <input type="number" id="petAgeInput" placeholder="Enter age">
+            </div>
+            
+            <div class="form-group">
+                <label for="petWeightInput">Weight (lbs)</label>
+                <input type="number" id="petWeightInput" placeholder="Enter weight">
+            </div>
+            
+            <div class="form-group">
+                <label for="petMedications">Medications</label>
+                <input type="text" id="petMedications" placeholder="List medications">
+            </div>
+            
+            <div class="form-group">
+                <label for="petConditions">Health Conditions</label>
+                <textarea id="petConditions" placeholder="Describe any health conditions"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="petAllergies">Allergies</label>
+                <input type="text" id="petAllergies" placeholder="List any allergies">
+            </div>
+            
+            <div class="form-buttons">
+                <button class="btn btn-secondary" id="cancelProfileBtn">Cancel</button>
+                <button class="btn btn-primary" id="saveProfileBtn">Save Profile</button>
+            </div>
+        </div>
+        
         <!-- Features Grid -->
         <h2 class="section-title">
             <i class="fas fa-star"></i>
             Premium Features
         </h2>
         <div class="features-grid">
-            <div class="feature-card active" id="healthBtn">
+            <div class="feature-card active" id="healthDashboardBtn">
                 <div class="feature-icon">
                     <i class="fas fa-heartbeat"></i>
                 </div>
@@ -898,7 +1067,7 @@
                 <div class="feature-badge">ACTIVE</div>
             </div>
             
-            <div class="feature-card" id="hydrationBtn">
+            <div class="feature-card" id="hydrationTrackerBtn">
                 <div class="feature-icon">
                     <i class="fas fa-tint"></i>
                 </div>
@@ -906,7 +1075,7 @@
                 <p>Water intake & alerts</p>
             </div>
             
-            <div class="feature-card" id="walkBtn">
+            <div class="feature-card" id="walkTrackerBtn">
                 <div class="feature-icon">
                     <i class="fas fa-walking"></i>
                 </div>
@@ -914,7 +1083,7 @@
                 <p>GPS tracking & calories</p>
             </div>
             
-            <div class="feature-card" id="symptomBtn">
+            <div class="feature-card" id="symptomScannerBtn">
                 <div class="feature-icon">
                     <i class="fas fa-stethoscope"></i>
                 </div>
@@ -922,7 +1091,7 @@
                 <p>Health analysis & advice</p>
             </div>
             
-            <div class="feature-card">
+            <div class="feature-card" id="foodTrackerBtn">
                 <div class="feature-icon">
                     <i class="fas fa-bone"></i>
                 </div>
@@ -930,9 +1099,9 @@
                 <p>Diet & nutrition monitoring</p>
             </div>
             
-            <div class="feature-card">
+            <div class="feature-card" id="vetConnectBtn">
                 <div class="feature-icon">
-                    <i class="fas fa-calendar-check"></i>
+                    <i class="fas fa-user-md"></i>
                 </div>
                 <h3>Vet Connect</h3>
                 <p>Book appointments online</p>
@@ -943,7 +1112,9 @@
         <div class="dashboard" id="healthDashboard">
             <div class="dashboard-header">
                 <div class="dashboard-title">Health Dashboard</div>
-                <div class="premium-indicator">PREMIUM</div>
+                <div class="close-btn" id="closeDashboard">
+                    <i class="fas fa-times"></i>
+                </div>
             </div>
             
             <div class="dashboard-stats">
@@ -984,14 +1155,29 @@
                     <div class="progress-fill" style="width: 78%;"></div>
                 </div>
             </div>
+            
+            <div class="dashboard-content">
+                <div class="dashboard-item">
+                    <h4><i class="fas fa-pills"></i> Current Medications</h4>
+                    <p>Heartgard Plus (Monthly), NexGard (Monthly)</p>
+                </div>
+                
+                <div class="dashboard-item">
+                    <h4><i class="fas fa-file-medical"></i> Medical History</h4>
+                    <p>2022: Treated for ear infection</p>
+                    <p>2021: Spay surgery</p>
+                </div>
+            </div>
         </div>
         
         <!-- Hydration Tracker -->
-        <div class="hydration" id="hydrationTracker" style="display: none;">
-            <h2 class="section-title">
-                <i class="fas fa-tint"></i>
-                Hydration Tracker
-            </h2>
+        <div class="hydration" id="hydrationTracker">
+            <div class="dashboard-header">
+                <div class="dashboard-title">Hydration Tracker</div>
+                <div class="close-btn" id="closeHydration">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
             
             <div class="water-goal">
                 Today's goal: <span>1500 ml</span>
@@ -1040,11 +1226,13 @@
         </div>
         
         <!-- Walk Tracker -->
-        <div class="walk-tracker" id="walkTracker" style="display: none;">
-            <h2 class="section-title">
-                <i class="fas fa-walking"></i>
-                Walk Tracker
-            </h2>
+        <div class="walk-tracker" id="walkTracker">
+            <div class="dashboard-header">
+                <div class="dashboard-title">Walk Tracker</div>
+                <div class="close-btn" id="closeWalkTracker">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
             
             <div class="map-placeholder">
                 <i class="fas fa-map-marked-alt"></i>
@@ -1066,17 +1254,19 @@
                 </div>
             </div>
             
-            <button class="start-button">
+            <button class="start-button" id="startWalkBtn">
                 <i class="fas fa-play"></i> Start New Walk
             </button>
         </div>
         
         <!-- Symptom Scanner -->
-        <div class="symptom-scanner" id="symptomScanner" style="display: none;">
-            <h2 class="section-title">
-                <i class="fas fa-stethoscope"></i>
-                Symptom Scanner
-            </h2>
+        <div class="symptom-scanner" id="symptomScanner">
+            <div class="dashboard-header">
+                <div class="dashboard-title">Symptom Scanner</div>
+                <div class="close-btn" id="closeSymptomScanner">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
             
             <p>Select symptoms your dog is showing:</p>
             
@@ -1091,7 +1281,7 @@
                 <div class="symptom-option">Itching</div>
             </div>
             
-            <button class="scan-button">
+            <button class="scan-button" id="scanSymptomsBtn">
                 <i class="fas fa-diagnoses"></i> Analyze Symptoms
             </button>
             
@@ -1101,185 +1291,286 @@
             </div>
         </div>
         
-        <!-- New Premium Features -->
-        <div class="new-features">
-            <h2 class="section-title">
-                <i class="fas fa-gem"></i>
-                Exclusive Premium Features
-            </h2>
-            
-            <div class="features-list">
-                <div class="feature-item">
-                    <i class="fas fa-user-md"></i>
-                    <div>24/7 Vet Chat</div>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-dna"></i>
-                    <div>Breed Insights</div>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-file-medical"></i>
-                    <div>Health Reports</div>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-cloud-download-alt"></i>
-                    <div>Data Export</div>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-bell"></i>
-                    <div>Smart Alerts</div>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-home"></i>
-                    <div>Smart Home Sync</div>
+        <!-- Food Tracker -->
+        <div class="food-tracker" id="foodTracker">
+            <div class="dashboard-header">
+                <div class="dashboard-title">Food Tracker</div>
+                <div class="close-btn" id="closeFoodTracker">
+                    <i class="fas fa-times"></i>
                 </div>
             </div>
+            
+            <div class="food-log">
+                <div class="food-item">
+                    <div class="food-info">
+                        <h4>Morning Meal</h4>
+                        <p>1.5 cups kibble, chicken</p>
+                    </div>
+                    <div class="food-calories">450 kcal</div>
+                </div>
+                
+                <div class="food-item">
+                    <div class="food-info">
+                        <h4>Afternoon Snack</h4>
+                        <p>Carrot sticks, apple slices</p>
+                    </div>
+                    <div class="food-calories">80 kcal</div>
+                </div>
+                
+                <div class="food-item">
+                    <div class="food-info">
+                        <h4>Evening Meal</h4>
+                        <p>1.5 cups kibble, salmon oil</p>
+                    </div>
+                    <div class="food-calories">480 kcal</div>
+                </div>
+            </div>
+            
+            <div class="add-food">
+                <input type="text" id="newFoodInput" placeholder="Add food item and calories">
+                <button id="addFoodBtn"><i class="fas fa-plus"></i></button>
+            </div>
+        </div>
+        
+        <!-- Vet Connect -->
+        <div class="dashboard" id="vetConnect">
+            <div class="dashboard-header">
+                <div class="dashboard-title">Vet Connect</div>
+                <div class="close-btn" id="closeVetConnect">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            
+            <div class="dashboard-content">
+                <div class="dashboard-item">
+                    <h4><i class="fas fa-calendar-check"></i> Upcoming Appointments</h4>
+                    <p>Annual Checkup: January 10, 2024 at 2:00 PM</p>
+                    <p>Vaccination: December 15, 2023 at 10:30 AM</p>
+                </div>
+                
+                <div class="dashboard-item">
+                    <h4><i class="fas fa-user-md"></i> Your Veterinarians</h4>
+                    <p>Dr. Sarah Johnson - Main Street Veterinary</p>
+                    <p>Dr. Michael Chen - Animal Wellness Center</p>
+                </div>
+                
+                <div class="dashboard-item">
+                    <h4><i class="fas fa-phone-alt"></i> Emergency Contacts</h4>
+                    <p>24/7 Emergency Vet: (555) 123-4567</p>
+                    <p>Animal Poison Control: (888) 426-4435</p>
+                </div>
+            </div>
+            
+            <button class="start-button" style="margin-top: 20px;">
+                <i class="fas fa-calendar-plus"></i> Book New Appointment
+            </button>
         </div>
     </div>
 
     <script>
-        // Toggle between features
-        const healthBtn = document.getElementById('healthBtn');
-        const hydrationBtn = document.getElementById('hydrationBtn');
-        const walkBtn = document.getElementById('walkBtn');
-        const symptomBtn = document.getElementById('symptomBtn');
-        
-        const healthDashboard = document.getElementById('healthDashboard');
-        const hydrationTracker = document.getElementById('hydrationTracker');
-        const walkTracker = document.getElementById('walkTracker');
-        const symptomScanner = document.getElementById('symptomScanner');
-        
-        const featureCards = document.querySelectorAll('.feature-card');
-        
-        function setActiveFeature(feature) {
-            // Hide all sections
-            healthDashboard.style.display = 'none';
-            hydrationTracker.style.display = 'none';
-            walkTracker.style.display = 'none';
-            symptomScanner.style.display = 'none';
+        // Initialize functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Pet profile functionality
+            const petProfileSection = document.getElementById('petProfileSection');
+            const profileForm = document.getElementById('profileForm');
             
-            // Remove active class from all cards
-            featureCards.forEach(card => {
-                card.classList.remove('active');
+            petProfileSection.addEventListener('click', function() {
+                this.style.display = 'none';
+                profileForm.style.display = 'block';
+                
+                // Fill form with current values
+                document.getElementById('petNameInput').value = document.getElementById('petName').textContent;
+                document.getElementById('petBreedInput').value = document.getElementById('petBreed').textContent;
+                document.getElementById('petAgeInput').value = document.getElementById('petAge').textContent;
+                document.getElementById('petWeightInput').value = document.getElementById('petWeight').textContent;
             });
             
-            // Show selected section and set active card
-            switch(feature) {
-                case 'health':
-                    healthDashboard.style.display = 'block';
-                    healthBtn.classList.add('active');
-                    break;
-                case 'hydration':
-                    hydrationTracker.style.display = 'block';
-                    hydrationBtn.classList.add('active');
-                    break;
-                case 'walk':
-                    walkTracker.style.display = 'block';
-                    walkBtn.classList.add('active');
-                    break;
-                case 'symptom':
-                    symptomScanner.style.display = 'block';
-                    symptomBtn.classList.add('active');
-                    break;
-            }
-        }
-        
-        // Set event listeners
-        healthBtn.addEventListener('click', () => setActiveFeature('health'));
-        hydrationBtn.addEventListener('click', () => setActiveFeature('hydration'));
-        walkBtn.addEventListener('click', () => setActiveFeature('walk'));
-        symptomBtn.addEventListener('click', () => setActiveFeature('symptom'));
-        
-        // Initialize with health dashboard
-        setActiveFeature('health');
-        
-        // Hydration Tracker Logic
-        let waterAmount = 650;
-        const waterGoal = 1500;
-        const waterAmountElement = document.getElementById('waterAmount');
-        const hydrationProgress = document.getElementById('hydrationProgress');
-        const historyList = document.getElementById('historyList');
-        
-        function updateHydration() {
-            waterAmountElement.textContent = `${waterAmount} ml`;
-            const percent = Math.min(100, Math.round((waterAmount / waterGoal) * 100));
-            hydrationProgress.style.width = `${percent}%`;
-            document.querySelector('.progress-percent').textContent = `${percent}%`;
-        }
-        
-        document.getElementById('plusWater').addEventListener('click', function() {
-            this.classList.add('pulse');
-            setTimeout(() => {
-                this.classList.remove('pulse');
-            }, 300);
-            
-            waterAmount += 100;
-            updateHydration();
-            
-            // Add to history
-            const now = new Date();
-            const timeString = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-            const historyItem = document.createElement('div');
-            historyItem.className = 'history-item';
-            historyItem.innerHTML = `
-                <div class="history-time"><i class="fas fa-clock"></i> ${timeString}</div>
-                <div class="history-amount">+100 ml</div>
-            `;
-            historyList.prepend(historyItem);
-        });
-        
-        document.getElementById('minusWater').addEventListener('click', function() {
-            if (waterAmount > 0) {
-                this.classList.add('pulse');
-                setTimeout(() => {
-                    this.classList.remove('pulse');
-                }, 300);
+            document.getElementById('saveProfileBtn').addEventListener('click', function() {
+                document.getElementById('petName').textContent = document.getElementById('petNameInput').value;
+                document.getElementById('petBreed').textContent = document.getElementById('petBreedInput').value;
+                document.getElementById('petAge').textContent = document.getElementById('petAgeInput').value;
+                document.getElementById('petWeight').textContent = document.getElementById('petWeightInput').value;
                 
-                waterAmount -= 100;
+                profileForm.style.display = 'none';
+                petProfileSection.style.display = 'flex';
+                
+                alert('Profile saved successfully!');
+            });
+            
+            document.getElementById('cancelProfileBtn').addEventListener('click', function() {
+                profileForm.style.display = 'none';
+                petProfileSection.style.display = 'flex';
+            });
+            
+            // Feature navigation
+            const features = {
+                healthDashboard: document.getElementById('healthDashboard'),
+                hydrationTracker: document.getElementById('hydrationTracker'),
+                walkTracker: document.getElementById('walkTracker'),
+                symptomScanner: document.getElementById('symptomScanner'),
+                foodTracker: document.getElementById('foodTracker'),
+                vetConnect: document.getElementById('vetConnect')
+            };
+            
+            const closeButtons = {
+                healthDashboard: document.getElementById('closeDashboard'),
+                hydrationTracker: document.getElementById('closeHydration'),
+                walkTracker: document.getElementById('closeWalkTracker'),
+                symptomScanner: document.getElementById('closeSymptomScanner'),
+                foodTracker: document.getElementById('closeFoodTracker'),
+                vetConnect: document.getElementById('closeVetConnect')
+            };
+            
+            // Open features
+            document.getElementById('healthDashboardBtn').addEventListener('click', function() {
+                showFeature('healthDashboard');
+            });
+            
+            document.getElementById('hydrationTrackerBtn').addEventListener('click', function() {
+                showFeature('hydrationTracker');
+            });
+            
+            document.getElementById('walkTrackerBtn').addEventListener('click', function() {
+                showFeature('walkTracker');
+            });
+            
+            document.getElementById('symptomScannerBtn').addEventListener('click', function() {
+                showFeature('symptomScanner');
+            });
+            
+            document.getElementById('foodTrackerBtn').addEventListener('click', function() {
+                showFeature('foodTracker');
+            });
+            
+            document.getElementById('vetConnectBtn').addEventListener('click', function() {
+                showFeature('vetConnect');
+            });
+            
+            // Close features
+            for (const feature in closeButtons) {
+                if (closeButtons[feature]) {
+                    closeButtons[feature].addEventListener('click', function() {
+                        hideAllFeatures();
+                    });
+                }
+            }
+            
+            function showFeature(featureName) {
+                // Hide all features first
+                hideAllFeatures();
+                
+                // Show the selected feature
+                features[featureName].style.display = 'block';
+            }
+            
+            function hideAllFeatures() {
+                for (const feature in features) {
+                    features[feature].style.display = 'none';
+                }
+            }
+            
+            // Hydration Tracker
+            let waterAmount = 650;
+            const waterAmountElement = document.getElementById('waterAmount');
+            const hydrationProgress = document.getElementById('hydrationProgress');
+            const historyList = document.getElementById('historyList');
+            
+            function updateHydration() {
+                waterAmountElement.textContent = `${waterAmount} ml`;
+                const percent = Math.min(100, Math.round((waterAmount / 1500) * 100));
+                hydrationProgress.style.width = `${percent}%`;
+                document.querySelector('.progress-percent').textContent = `${percent}%`;
+            }
+            
+            document.getElementById('plusWater').addEventListener('click', function() {
+                waterAmount += 100;
                 updateHydration();
-            }
-        });
-        
-        // Symptom Scanner Logic
-        const symptomOptions = document.querySelectorAll('.symptom-option');
-        symptomOptions.forEach(option => {
-            option.addEventListener('click', function() {
-                this.classList.toggle('selected');
+                
+                // Add to history
+                const now = new Date();
+                const timeString = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                const historyItem = document.createElement('div');
+                historyItem.className = 'history-item';
+                historyItem.innerHTML = `
+                    <div class="history-time"><i class="fas fa-clock"></i> ${timeString}</div>
+                    <div class="history-amount">+100 ml</div>
+                `;
+                historyList.prepend(historyItem);
             });
-        });
-        
-        document.querySelector('.scan-button').addEventListener('click', function() {
-            const selectedSymptoms = document.querySelectorAll('.symptom-option.selected');
-            if (selectedSymptoms.length > 0) {
-                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing...';
+            
+            document.getElementById('minusWater').addEventListener('click', function() {
+                if (waterAmount > 0) {
+                    waterAmount -= 100;
+                    updateHydration();
+                    
+                    // Add to history
+                    const now = new Date();
+                    const timeString = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                    const historyItem = document.createElement('div');
+                    historyItem.className = 'history-item';
+                    historyItem.innerHTML = `
+                        <div class="history-time"><i class="fas fa-clock"></i> ${timeString}</div>
+                        <div class="history-amount">-100 ml</div>
+                    `;
+                    historyList.prepend(historyItem);
+                }
+            });
+            
+            // Symptom Scanner
+            const symptomOptions = document.querySelectorAll('.symptom-option');
+            symptomOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    this.classList.toggle('selected');
+                });
+            });
+            
+            document.getElementById('scanSymptomsBtn').addEventListener('click', function() {
+                const selectedSymptoms = document.querySelectorAll('.symptom-option.selected');
+                if (selectedSymptoms.length > 0) {
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing...';
+                    
+                    setTimeout(() => {
+                        this.innerHTML = '<i class="fas fa-diagnoses"></i> Analyze Symptoms';
+                        document.getElementById('scanResult').style.display = 'block';
+                    }, 1500);
+                } else {
+                    alert('Please select at least one symptom.');
+                }
+            });
+            
+            // Walk Tracker
+            document.getElementById('startWalkBtn').addEventListener('click', function() {
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Starting...';
                 
                 setTimeout(() => {
-                    this.innerHTML = '<i class="fas fa-diagnoses"></i> Analyze Symptoms';
-                    document.getElementById('scanResult').style.display = 'block';
-                }, 1500);
-            } else {
-                alert('Please select at least one symptom.');
-            }
-        });
-        
-        // Walk Tracker Button
-        document.querySelector('.start-button').addEventListener('click', function() {
-            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Starting...';
+                    this.innerHTML = '<i class="fas fa-walking"></i> Walk in Progress';
+                    alert('GPS Walk Tracking started! Distance and calories will update in real-time.');
+                }, 1000);
+            });
             
-            setTimeout(() => {
-                this.innerHTML = '<i class="fas fa-walking"></i> Walk in Progress';
-                alert('GPS Walk Tracking started! Distance and calories will update in real-time.');
-            }, 1000);
+            // Food Tracker
+            document.getElementById('addFoodBtn').addEventListener('click', function() {
+                const input = document.getElementById('newFoodInput');
+                if (input.value.trim() !== '') {
+                    const foodLog = document.querySelector('.food-log');
+                    
+                    const newFood = document.createElement('div');
+                    newFood.className = 'food-item';
+                    newFood.innerHTML = `
+                        <div class="food-info">
+                            <h4>New Food</h4>
+                            <p>${input.value}</p>
+                        </div>
+                        <div class="food-calories">0 kcal</div>
+                    `;
+                    
+                    foodLog.appendChild(newFood);
+                    input.value = '';
+                    
+                    alert('Food item added! Remember to update calories.');
+                }
+            });
         });
-        
-        // Make dog wag continuously
-        const dogIcon = document.querySelector('.dog-icon');
-        setInterval(() => {
-            dogIcon.style.animation = 'none';
-            setTimeout(() => {
-                dogIcon.style.animation = 'wag 1s infinite alternate';
-            }, 10);
-        }, 5000);
     </script>
 </body>
 </html>
