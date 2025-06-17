@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PawHealth Pro - Ultimate Dog Health Tracker</title>
+    <title>PawHealth Pro - Complete Dog Health Tracker</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -686,39 +686,43 @@
             display: none;
         }
         
-        .map-placeholder {
-            height: 200px;
-            background: linear-gradient(135deg, #e0f7fa 0%, #caf0f8 100%);
-            border-radius: 16px;
+        .walk-controls {
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            gap: 20px;
             margin: 20px 0;
-            color: var(--primary);
-            border: 2px dashed var(--accent);
-            position: relative;
-            overflow: hidden;
         }
         
-        .map-placeholder::before {
-            content: "";
-            position: absolute;
-            width: 150%;
-            height: 30px;
-            background: repeating-linear-gradient(
-                45deg,
-                transparent,
-                transparent 10px,
-                rgba(76, 201, 240, 0.1) 10px,
-                rgba(76, 201, 240, 0.1) 20px
-            );
-            transform: rotate(-15deg);
+        .walk-btn {
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
-        .map-placeholder i {
-            font-size: 50px;
-            margin-bottom: 15px;
+        .walk-btn.start {
+            background: var(--success);
+            color: white;
+            box-shadow: 0 6px 15px rgba(6, 214, 160, 0.4);
+        }
+        
+        .walk-btn.stop {
+            background: var(--danger);
+            color: white;
+            box-shadow: 0 6px 15px rgba(239, 71, 111, 0.4);
+        }
+        
+        .walk-stats-container {
+            background: rgba(76, 201, 240, 0.1);
+            border-radius: 16px;
+            padding: 20px;
+            margin: 25px 0;
         }
         
         .walk-stats {
@@ -726,19 +730,10 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 15px;
             text-align: center;
-            margin: 25px 0;
         }
         
         .walk-stat {
-            background: rgba(76, 201, 240, 0.1);
-            border-radius: 16px;
             padding: 15px;
-            transition: var(--transition);
-        }
-        
-        .walk-stat:hover {
-            transform: translateY(-5px);
-            background: rgba(76, 201, 240, 0.2);
         }
         
         .walk-stat .value {
@@ -753,32 +748,28 @@
             color: var(--gray);
         }
         
-        .start-button {
-            background: linear-gradient(135deg, var(--success) 0%, #06b394 100%);
-            color: white;
-            border: none;
-            padding: 18px;
-            border-radius: 50px;
-            font-size: 20px;
-            font-weight: bold;
-            width: 100%;
-            margin-top: 10px;
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: 0 6px 20px rgba(6, 214, 160, 0.4);
+        .walk-map {
+            height: 200px;
+            background: linear-gradient(135deg, #e0f7fa 0%, #caf0f8 100%);
+            border-radius: 16px;
+            margin: 20px 0;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            color: var(--primary);
+            border: 2px dashed var(--accent);
+            position: relative;
+            overflow: hidden;
         }
         
-        .start-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(6, 214, 160, 0.6);
+        .walk-map i {
+            font-size: 50px;
+            margin-bottom: 15px;
         }
         
-        /* Symptom Scanner */
-        .symptom-scanner {
+        /* Nutrition Tracker */
+        .nutrition-tracker {
             background: rgba(255, 255, 255, 0.9);
             border-radius: var(--radius);
             padding: 25px;
@@ -789,140 +780,76 @@
             display: none;
         }
         
-        .symptom-options {
+        .food-selection {
+            margin: 20px 0;
+        }
+        
+        .food-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
-            margin: 25px 0;
+            margin: 20px 0;
         }
         
-        .symptom-option {
+        .food-item {
             background: #f8f9fa;
             border: 2px solid #e9ecef;
             border-radius: 16px;
-            padding: 18px 10px;
+            padding: 15px;
             text-align: center;
             cursor: pointer;
             transition: var(--transition);
-            font-weight: 500;
         }
         
-        .symptom-option:hover {
-            border-color: var(--accent);
-            transform: translateY(-3px);
-        }
-        
-        .symptom-option.selected {
+        .food-item.selected {
             border-color: var(--success);
             background: rgba(6, 214, 160, 0.1);
             box-shadow: 0 4px 10px rgba(6, 214, 160, 0.1);
         }
         
-        .scan-button {
-            background: linear-gradient(135deg, var(--primary) 0%, #5e60ce 100%);
-            color: white;
-            border: none;
-            padding: 18px;
-            border-radius: 50px;
-            font-size: 20px;
-            font-weight: bold;
-            width: 100%;
-            margin-top: 15px;
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+        .food-item h4 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: var(--dark);
         }
         
-        .scan-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(67, 97, 238, 0.6);
+        .food-item .calories {
+            font-size: 14px;
+            color: var(--primary);
+            font-weight: 600;
         }
         
-        .scan-result {
+        .nutrition-results {
             margin-top: 25px;
             padding: 20px;
-            background: rgba(6, 214, 160, 0.1);
+            background: rgba(76, 201, 240, 0.1);
             border-radius: 16px;
-            border-left: 4px solid var(--success);
-            display: none;
-            animation: fadeIn 0.8s ease-out;
+            border-left: 4px solid var(--accent);
         }
         
-        .scan-result h4 {
-            font-size: 18px;
-            margin-bottom: 10px;
-            color: var(--dark);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        /* Food Tracker */
-        .food-tracker {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: var(--radius);
-            padding: 25px;
-            box-shadow: var(--shadow);
-            margin-bottom: 25px;
-            backdrop-filter: blur(5px);
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            display: none;
-        }
-        
-        .food-log {
-            margin-top: 20px;
-        }
-        
-        .food-item {
+        .nutrient-item {
             display: flex;
             justify-content: space-between;
-            padding: 15px 0;
-            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(76, 201, 240, 0.3);
         }
         
-        .food-info h4 {
-            font-size: 18px;
-            margin-bottom: 5px;
-            color: var(--dark);
+        .nutrient-label {
+            font-weight: 500;
         }
         
-        .food-info p {
-            color: var(--gray);
-            font-size: 14px;
-        }
-        
-        .food-calories {
-            font-weight: bold;
+        .nutrient-value {
+            font-weight: 600;
             color: var(--primary);
-            display: flex;
-            align-items: center;
         }
         
-        .add-food {
-            display: flex;
-            gap: 10px;
+        .exercise-info {
+            background: rgba(255, 209, 102, 0.2);
+            padding: 15px;
+            border-radius: 16px;
             margin-top: 20px;
-        }
-        
-        .add-food input {
-            flex: 1;
-            padding: 12px 15px;
-            border-radius: 12px;
-            border: 1px solid #ddd;
-            font-size: 16px;
-        }
-        
-        .add-food button {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 12px;
-            cursor: pointer;
+            text-align: center;
+            border-left: 4px solid var(--warning);
         }
         
         /* Vet Connect */
@@ -935,6 +862,14 @@
             backdrop-filter: blur(5px);
             border: 2px solid rgba(255, 255, 255, 0.5);
             display: none;
+        }
+        
+        .vet-form {
+            margin: 20px 0;
+        }
+        
+        .vet-form .form-group {
+            margin-bottom: 15px;
         }
         
         .vet-appointments {
@@ -989,13 +924,9 @@
             color: #8a6500;
         }
         
-        .appointment-btn.cancel {
+        .appointment-btn.delete {
             background: var(--danger);
             color: white;
-        }
-        
-        .add-appointment {
-            margin-top: 25px;
         }
         
         /* Reminders Panel */
@@ -1072,55 +1003,6 @@
             color: var(--gray);
         }
         
-        .reminder-actions {
-            margin-top: 10px;
-            display: flex;
-            gap: 10px;
-        }
-        
-        .reminder-btn {
-            padding: 5px 10px;
-            border-radius: 8px;
-            font-size: 12px;
-            cursor: pointer;
-            border: none;
-        }
-        
-        .reminder-btn.snooze {
-            background: #e9ecef;
-        }
-        
-        .reminder-btn.dismiss {
-            background: var(--danger);
-            color: white;
-        }
-        
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes fadeInLeft {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        
         /* Notification Bell */
         .notification-bell {
             position: absolute;
@@ -1160,12 +1042,38 @@
             justify-content: center;
         }
         
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
         /* Responsive */
         @media (max-width: 480px) {
             .features-grid, 
             .dashboard-stats,
             .walk-stats,
-            .symptom-options {
+            .food-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -1183,6 +1091,10 @@
                 left: 20px;
                 right: 20px;
                 top: 20px;
+            }
+            
+            .walk-controls {
+                flex-direction: column;
             }
         }
     </style>
@@ -1280,12 +1192,12 @@
             
             <div class="form-group">
                 <label for="petAgeInput">Age (years)</label>
-                <input type="number" id="petAgeInput" placeholder="Enter age">
+                <input type="number" id="petAgeInput" placeholder="Enter age" min="0" step="0.1">
             </div>
             
             <div class="form-group">
                 <label for="petWeightInput">Weight (lbs)</label>
-                <input type="number" id="petWeightInput" placeholder="Enter weight">
+                <input type="number" id="petWeightInput" placeholder="Enter weight" min="0">
             </div>
             
             <div class="form-group">
@@ -1294,25 +1206,8 @@
             </div>
             
             <div class="form-group">
-                <label for="petConditions">Health Conditions</label>
-                <textarea id="petConditions" placeholder="Describe any health conditions"></textarea>
-            </div>
-            
-            <div class="form-group">
-                <label for="petAllergies">Allergies</label>
-                <input type="text" id="petAllergies" placeholder="List any allergies">
-            </div>
-            
-            <div class="form-group">
-                <label for="medicationReminder">Medication Reminder</label>
-                <input type="text" id="medicationReminder" placeholder="Medication name">
-                <input type="time" id="medicationTime" class="mt-2">
-            </div>
-            
-            <div class="form-group">
-                <label for="vetAppointment">Vet Appointment</label>
-                <input type="text" id="vetAppointment" placeholder="Appointment reason">
-                <input type="datetime-local" id="appointmentTime" class="mt-2">
+                <label for="medicationReminderTime">Medication Reminder Time</label>
+                <input type="time" id="medicationReminderTime">
             </div>
             
             <div class="form-buttons">
@@ -1360,12 +1255,12 @@
                 <p>Health analysis & advice</p>
             </div>
             
-            <div class="feature-card" id="foodTrackerBtn">
+            <div class="feature-card" id="nutritionTrackerBtn">
                 <div class="feature-icon">
                     <i class="fas fa-bone"></i>
                 </div>
-                <h3>Food Tracker</h3>
-                <p>Diet & nutrition monitoring</p>
+                <h3>Nutrition Tracker</h3>
+                <p>Food & exercise planning</p>
             </div>
             
             <div class="feature-card" id="vetConnectBtn">
@@ -1388,7 +1283,7 @@
             
             <div class="dashboard-stats">
                 <div class="stat-card">
-                    <div class="value">62 lbs</div>
+                    <div class="value" id="dashWeight">62 lbs</div>
                     <div class="label">Current Weight</div>
                 </div>
                 <div class="stat-card">
@@ -1428,13 +1323,12 @@
             <div class="dashboard-content">
                 <div class="dashboard-item">
                     <h4><i class="fas fa-pills"></i> Current Medications</h4>
-                    <p>Heartgard Plus (Monthly), NexGard (Monthly)</p>
+                    <p id="dashMedications">Heartgard Plus (Monthly), NexGard (Monthly)</p>
                 </div>
                 
                 <div class="dashboard-item">
-                    <h4><i class="fas fa-file-medical"></i> Medical History</h4>
-                    <p>2022: Treated for ear infection</p>
-                    <p>2021: Spay surgery</p>
+                    <h4><i class="fas fa-file-medical"></i> Next Medication Reminder</h4>
+                    <p id="dashMedReminder">Today, 8:00 PM</p>
                 </div>
             </div>
         </div>
@@ -1503,101 +1397,100 @@
                 </div>
             </div>
             
-            <div class="map-placeholder">
+            <div class="walk-map">
                 <i class="fas fa-map-marked-alt"></i>
-                <p>GPS Tracking Active</p>
+                <p>GPS Tracking Ready</p>
             </div>
             
-            <div class="walk-stats">
-                <div class="walk-stat">
-                    <div class="value">1.8</div>
-                    <div class="label">Miles</div>
-                </div>
-                <div class="walk-stat">
-                    <div class="value">42</div>
-                    <div class="label">Minutes</div>
-                </div>
-                <div class="walk-stat">
-                    <div class="value">210</div>
-                    <div class="label">Calories</div>
-                </div>
+            <div class="walk-controls">
+                <button class="walk-btn start" id="startWalkBtn">
+                    <i class="fas fa-play"></i> Start Walk
+                </button>
+                <button class="walk-btn stop" id="stopWalkBtn" disabled>
+                    <i class="fas fa-stop"></i> End Walk
+                </button>
             </div>
             
-            <button class="start-button" id="startWalkBtn">
-                <i class="fas fa-play"></i> Start New Walk
-            </button>
+            <div class="walk-stats-container">
+                <div class="walk-stats">
+                    <div class="walk-stat">
+                        <div class="value" id="walkDistance">0.0</div>
+                        <div class="label">Miles</div>
+                    </div>
+                    <div class="walk-stat">
+                        <div class="value" id="walkTime">0</div>
+                        <div class="label">Minutes</div>
+                    </div>
+                    <div class="walk-stat">
+                        <div class="value" id="walkCalories">0</div>
+                        <div class="label">Calories</div>
+                    </div>
+                </div>
+            </div>
         </div>
         
-        <!-- Symptom Scanner -->
-        <div class="symptom-scanner" id="symptomScanner">
+        <!-- Nutrition Tracker -->
+        <div class="nutrition-tracker" id="nutritionTracker">
             <div class="dashboard-header">
-                <div class="dashboard-title">Symptom Scanner</div>
-                <div class="close-btn" id="closeSymptomScanner">
+                <div class="dashboard-title">Nutrition Tracker</div>
+                <div class="close-btn" id="closeNutritionTracker">
                     <i class="fas fa-times"></i>
                 </div>
             </div>
             
-            <p>Select symptoms your dog is showing:</p>
-            
-            <div class="symptom-options">
-                <div class="symptom-option">Lethargy</div>
-                <div class="symptom-option">Vomiting</div>
-                <div class="symptom-option">Diarrhea</div>
-                <div class="symptom-option">Loss of Appetite</div>
-                <div class="symptom-option">Coughing</div>
-                <div class="symptom-option">Excessive Thirst</div>
-                <div class="symptom-option">Limping</div>
-                <div class="symptom-option">Itching</div>
-            </div>
-            
-            <button class="scan-button" id="scanSymptomsBtn">
-                <i class="fas fa-diagnoses"></i> Analyze Symptoms
-            </button>
-            
-            <div class="scan-result" id="scanResult">
-                <h4><i class="fas fa-check-circle"></i> Analysis Complete</h4>
-                <p>Based on the symptoms, your dog may be experiencing mild dehydration or dietary sensitivity. Ensure fresh water is always available and monitor food intake. If symptoms persist for more than 24 hours, consult your veterinarian.</p>
-            </div>
-        </div>
-        
-        <!-- Food Tracker -->
-        <div class="food-tracker" id="foodTracker">
-            <div class="dashboard-header">
-                <div class="dashboard-title">Food Tracker</div>
-                <div class="close-btn" id="closeFoodTracker">
-                    <i class="fas fa-times"></i>
-                </div>
-            </div>
-            
-            <div class="food-log">
-                <div class="food-item">
-                    <div class="food-info">
-                        <h4>Morning Meal</h4>
-                        <p>1.5 cups kibble, chicken</p>
+            <div class="food-selection">
+                <h4>Select Foods for Your Dog:</h4>
+                <div class="food-grid" id="foodGrid">
+                    <div class="food-item" data-food="premium-dry" data-calories="350" data-protein="26" data-fat="15" data-carbs="45">
+                        <h4>Premium Dry Food</h4>
+                        <div class="calories">350 kcal/cup</div>
                     </div>
-                    <div class="food-calories">450 kcal</div>
-                </div>
-                
-                <div class="food-item">
-                    <div class="food-info">
-                        <h4>Afternoon Snack</h4>
-                        <p>Carrot sticks, apple slices</p>
+                    <div class="food-item" data-food="chicken-wet" data-calories="250" data-protein="30" data-fat="10" data-carbs="10">
+                        <h4>Chicken Wet Food</h4>
+                        <div class="calories">250 kcal/can</div>
                     </div>
-                    <div class="food-calories">80 kcal</div>
-                </div>
-                
-                <div class="food-item">
-                    <div class="food-info">
-                        <h4>Evening Meal</h4>
-                        <p>1.5 cups kibble, salmon oil</p>
+                    <div class="food-item" data-food="salmon-treats" data-calories="90" data-protein="20" data-fat="30" data-carbs="30">
+                        <h4>Salmon Treats</h4>
+                        <div class="calories">90 kcal/oz</div>
                     </div>
-                    <div class="food-calories">480 kcal</div>
+                    <div class="food-item" data-food="vegetable-mix" data-calories="50" data-protein="5" data-fat="2" data-carbs="80">
+                        <h4>Vegetable Mix</h4>
+                        <div class="calories">50 kcal/cup</div>
+                    </div>
+                    <div class="food-item" data-food="beef-jerky" data-calories="120" data-protein="40" data-fat="20" data-carbs="20">
+                        <h4>Beef Jerky</h4>
+                        <div class="calories">120 kcal/oz</div>
+                    </div>
+                    <div class="food-item" data-food="rice-chicken" data-calories="200" data-protein="25" data-fat="5" data-carbs="60">
+                        <h4>Rice & Chicken</h4>
+                        <div class="calories">200 kcal/cup</div>
+                    </div>
                 </div>
             </div>
             
-            <div class="add-food">
-                <input type="text" id="newFoodInput" placeholder="Add food item and calories (e.g., Chicken, 120 kcal)">
-                <button id="addFoodBtn"><i class="fas fa-plus"></i></button>
+            <div class="nutrition-results">
+                <h4>Nutritional Summary:</h4>
+                <div class="nutrient-item">
+                    <div class="nutrient-label">Total Calories:</div>
+                    <div class="nutrient-value" id="totalCalories">0 kcal</div>
+                </div>
+                <div class="nutrient-item">
+                    <div class="nutrient-label">Protein:</div>
+                    <div class="nutrient-value" id="totalProtein">0g</div>
+                </div>
+                <div class="nutrient-item">
+                    <div class="nutrient-label">Fat:</div>
+                    <div class="nutrient-value" id="totalFat">0g</div>
+                </div>
+                <div class="nutrient-item">
+                    <div class="nutrient-label">Carbs:</div>
+                    <div class="nutrient-value" id="totalCarbs">0g</div>
+                </div>
+            </div>
+            
+            <div class="exercise-info">
+                <h4><i class="fas fa-running"></i> Exercise Recommendation</h4>
+                <p>Your dog needs approximately <strong id="exerciseTime">0 minutes</strong> of exercise today to maintain a healthy weight.</p>
             </div>
         </div>
         
@@ -1610,40 +1503,37 @@
                 </div>
             </div>
             
-            <div class="vet-appointments">
-                <div class="appointment-item upcoming">
-                    <h4><i class="fas fa-calendar-check"></i> Annual Checkup</h4>
-                    <p>Dr. Sarah Johnson - Main Street Veterinary</p>
-                    <div class="appointment-details">
-                        <div class="appointment-time">
-                            <i class="fas fa-clock"></i> Tomorrow, 2:00 PM
-                        </div>
-                        <div class="appointment-actions">
-                            <button class="appointment-btn remind">Set Reminder</button>
-                            <button class="appointment-btn cancel">Cancel</button>
-                        </div>
-                    </div>
+            <div class="vet-form">
+                <div class="form-group">
+                    <label for="vetName">Vet Name</label>
+                    <input type="text" id="vetName" placeholder="Enter vet's name">
                 </div>
                 
-                <div class="appointment-item">
-                    <h4><i class="fas fa-syringe"></i> Vaccination</h4>
-                    <p>Dr. Michael Chen - Animal Wellness Center</p>
-                    <div class="appointment-details">
-                        <div class="appointment-time">
-                            <i class="fas fa-clock"></i> Dec 15, 2023 at 10:30 AM
-                        </div>
-                        <div class="appointment-actions">
-                            <button class="appointment-btn remind">Set Reminder</button>
-                            <button class="appointment-btn cancel">Cancel</button>
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label for="clinicName">Clinic Name</label>
+                    <input type="text" id="clinicName" placeholder="Enter clinic name">
                 </div>
+                
+                <div class="form-group">
+                    <label for="appointmentDate">Appointment Date & Time</label>
+                    <input type="datetime-local" id="appointmentDate">
+                </div>
+                
+                <div class="form-group">
+                    <label for="appointmentReason">Reason</label>
+                    <input type="text" id="appointmentReason" placeholder="Reason for appointment">
+                </div>
+                
+                <button class="btn btn-primary" id="saveAppointmentBtn">
+                    <i class="fas fa-calendar-plus"></i> Book Appointment
+                </button>
             </div>
             
-            <div class="add-appointment">
-                <button class="start-button">
-                    <i class="fas fa-calendar-plus"></i> Book New Appointment
-                </button>
+            <div class="vet-appointments">
+                <h4>Upcoming Appointments:</h4>
+                <div id="appointmentsList">
+                    <!-- Appointments will be added here -->
+                </div>
             </div>
         </div>
     </div>
@@ -1667,10 +1557,30 @@
             });
             
             document.getElementById('saveProfileBtn').addEventListener('click', function() {
-                document.getElementById('petName').textContent = document.getElementById('petNameInput').value;
-                document.getElementById('petBreed').textContent = document.getElementById('petBreedInput').value;
-                document.getElementById('petAge').textContent = document.getElementById('petAgeInput').value;
-                document.getElementById('petWeight').textContent = document.getElementById('petWeightInput').value;
+                // Update pet profile
+                const petName = document.getElementById('petNameInput').value;
+                const petBreed = document.getElementById('petBreedInput').value;
+                const petAge = document.getElementById('petAgeInput').value;
+                const petWeight = document.getElementById('petWeightInput').value;
+                const medicationTime = document.getElementById('medicationReminderTime').value;
+                
+                document.getElementById('petName').textContent = petName;
+                document.getElementById('petBreed').textContent = petBreed;
+                document.getElementById('petAge').textContent = petAge;
+                document.getElementById('petWeight').textContent = petWeight;
+                
+                // Update dashboard
+                document.getElementById('dashWeight').textContent = petWeight + ' lbs';
+                
+                // Set medication reminder
+                if (medicationTime) {
+                    const [hours, minutes] = medicationTime.split(':');
+                    const formattedTime = `${hours}:${minutes}`;
+                    document.getElementById('dashMedReminder').textContent = `Daily at ${formattedTime}`;
+                    
+                    // Add to reminders
+                    addReminder('Give Medication', `Daily at ${formattedTime}`);
+                }
                 
                 profileForm.style.display = 'none';
                 petProfileSection.style.display = 'flex';
@@ -1689,8 +1599,7 @@
                 healthDashboard: document.getElementById('healthDashboard'),
                 hydrationTracker: document.getElementById('hydrationTracker'),
                 walkTracker: document.getElementById('walkTracker'),
-                symptomScanner: document.getElementById('symptomScanner'),
-                foodTracker: document.getElementById('foodTracker'),
+                nutritionTracker: document.getElementById('nutritionTracker'),
                 vetConnect: document.getElementById('vetConnect')
             };
             
@@ -1698,8 +1607,7 @@
                 healthDashboard: document.getElementById('closeDashboard'),
                 hydrationTracker: document.getElementById('closeHydration'),
                 walkTracker: document.getElementById('closeWalkTracker'),
-                symptomScanner: document.getElementById('closeSymptomScanner'),
-                foodTracker: document.getElementById('closeFoodTracker'),
+                nutritionTracker: document.getElementById('closeNutritionTracker'),
                 vetConnect: document.getElementById('closeVetConnect')
             };
             
@@ -1716,12 +1624,8 @@
                 showFeature('walkTracker');
             });
             
-            document.getElementById('symptomScannerBtn').addEventListener('click', function() {
-                showFeature('symptomScanner');
-            });
-            
-            document.getElementById('foodTrackerBtn').addEventListener('click', function() {
-                showFeature('foodTracker');
+            document.getElementById('nutritionTrackerBtn').addEventListener('click', function() {
+                showFeature('nutritionTracker');
             });
             
             document.getElementById('vetConnectBtn').addEventListener('click', function() {
@@ -1807,114 +1711,206 @@
                 }
             });
             
-            // ===== SYMPTOM SCANNER =====
-            const symptomOptions = document.querySelectorAll('.symptom-option');
-            symptomOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    this.classList.toggle('selected');
-                });
-            });
-            
-            document.getElementById('scanSymptomsBtn').addEventListener('click', function() {
-                const selectedSymptoms = document.querySelectorAll('.symptom-option.selected');
-                if (selectedSymptoms.length > 0) {
-                    const originalHTML = this.innerHTML;
-                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing...';
-                    
-                    setTimeout(() => {
-                        this.innerHTML = originalHTML;
-                        document.getElementById('scanResult').style.display = 'block';
-                        
-                        // Show notification
-                        showNotification('Symptom analysis complete!', 'info');
-                    }, 1500);
-                } else {
-                    showNotification('Please select at least one symptom.', 'warning');
-                }
-            });
-            
             // ===== WALK TRACKER =====
-            document.getElementById('startWalkBtn').addEventListener('click', function() {
-                const originalHTML = this.innerHTML;
-                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Starting...';
+            let walkInterval;
+            let walkTime = 0;
+            let walkDistance = 0;
+            let walkCalories = 0;
+            const startBtn = document.getElementById('startWalkBtn');
+            const stopBtn = document.getElementById('stopWalkBtn');
+            
+            startBtn.addEventListener('click', function() {
+                startBtn.disabled = true;
+                stopBtn.disabled = false;
                 
-                setTimeout(() => {
-                    this.innerHTML = '<i class="fas fa-walking"></i> Walk in Progress';
+                // Show notification
+                showNotification('Walk tracking started!', 'success');
+                
+                // Start walk simulation
+                walkInterval = setInterval(function() {
+                    walkTime++;
+                    walkDistance = (walkTime * 0.04).toFixed(1); // Simulate 0.04 miles per minute
+                    walkCalories = Math.floor(walkTime * 5); // Simulate 5 calories per minute
                     
-                    // Show notification
-                    showNotification('Walk tracking started!', 'success');
+                    // Update display
+                    document.getElementById('walkTime').textContent = walkTime;
+                    document.getElementById('walkDistance').textContent = walkDistance;
+                    document.getElementById('walkCalories').textContent = walkCalories;
                     
-                    // Simulate walk tracking
-                    let distance = 0;
-                    let minutes = 0;
-                    let calories = 0;
-                    
-                    const interval = setInterval(() => {
-                        distance += 0.1;
-                        minutes++;
-                        calories += 5;
-                        
-                        document.querySelector('.walk-stat:nth-child(1) .value').textContent = distance.toFixed(1);
-                        document.querySelector('.walk-stat:nth-child(2) .value').textContent = minutes;
-                        document.querySelector('.walk-stat:nth-child(3) .value').textContent = calories;
-                        
-                        if (minutes >= 42) {
-                            clearInterval(interval);
-                            this.innerHTML = '<i class="fas fa-stop"></i> End Walk';
-                            this.onclick = function() {
-                                clearInterval(interval);
-                                this.innerHTML = '<i class="fas fa-play"></i> Start New Walk';
-                                this.onclick = arguments.callee;
-                                showNotification('Walk completed! Good job!', 'success');
-                            };
-                        }
-                    }, 1000);
+                    // Update map message
+                    document.querySelector('.walk-map p').textContent = `Walking: ${walkDistance} miles`;
                 }, 1000);
             });
             
-            // ===== FOOD TRACKER =====
-            document.getElementById('addFoodBtn').addEventListener('click', function() {
-                const input = document.getElementById('newFoodInput');
-                if (input.value.trim() !== '') {
-                    const foodLog = document.querySelector('.food-log');
-                    
-                    // Parse food and calories
-                    const foodParts = input.value.split(',');
-                    const foodName = foodParts[0] || 'New Food';
-                    const calories = foodParts[1] ? foodParts[1].trim() + ' kcal' : '0 kcal';
-                    
-                    const newFood = document.createElement('div');
-                    newFood.className = 'food-item';
-                    newFood.innerHTML = `
-                        <div class="food-info">
-                            <h4>${foodName}</h4>
-                            <p>${input.value}</p>
-                        </div>
-                        <div class="food-calories">${calories}</div>
-                    `;
-                    
-                    foodLog.appendChild(newFood);
-                    input.value = '';
-                    
-                    // Show notification
-                    showNotification('Food item added!', 'success');
-                }
+            stopBtn.addEventListener('click', function() {
+                startBtn.disabled = false;
+                stopBtn.disabled = true;
+                
+                // Stop walk simulation
+                clearInterval(walkInterval);
+                
+                // Show notification
+                showNotification(`Walk completed! Distance: ${walkDistance} miles, Calories burned: ${walkCalories}`, 'success');
+                
+                // Reset for next walk
+                walkTime = 0;
+                walkDistance = 0;
+                walkCalories = 0;
+                
+                // Reset display
+                document.getElementById('walkTime').textContent = '0';
+                document.getElementById('walkDistance').textContent = '0.0';
+                document.getElementById('walkCalories').textContent = '0';
+                document.querySelector('.walk-map p').textContent = 'GPS Tracking Ready';
             });
             
-            // ===== VET CONNECT =====
-            document.querySelectorAll('.appointment-btn.remind').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const appointmentItem = this.closest('.appointment-item');
-                    const title = appointmentItem.querySelector('h4').textContent;
-                    const time = appointmentItem.querySelector('.appointment-time').textContent;
+            // ===== NUTRITION TRACKER =====
+            const foodGrid = document.getElementById('foodGrid');
+            const foodItems = foodGrid.querySelectorAll('.food-item');
+            let selectedFoods = [];
+            
+            // Food selection
+            foodItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    this.classList.toggle('selected');
                     
-                    // Add to reminders
-                    addReminder(title, time);
+                    const foodId = this.getAttribute('data-food');
                     
-                    // Show notification
-                    showNotification('Reminder set for appointment!', 'success');
+                    if (this.classList.contains('selected')) {
+                        selectedFoods.push({
+                            id: foodId,
+                            name: this.querySelector('h4').textContent,
+                            calories: parseInt(this.getAttribute('data-calories')),
+                            protein: parseInt(this.getAttribute('data-protein')),
+                            fat: parseInt(this.getAttribute('data-fat')),
+                            carbs: parseInt(this.getAttribute('data-carbs'))
+                        });
+                    } else {
+                        selectedFoods = selectedFoods.filter(food => food.id !== foodId);
+                    }
+                    
+                    updateNutritionSummary();
                 });
             });
+            
+            function updateNutritionSummary() {
+                let totalCalories = 0;
+                let totalProtein = 0;
+                let totalFat = 0;
+                let totalCarbs = 0;
+                
+                selectedFoods.forEach(food => {
+                    totalCalories += food.calories;
+                    totalProtein += food.protein;
+                    totalFat += food.fat;
+                    totalCarbs += food.carbs;
+                });
+                
+                // Update display
+                document.getElementById('totalCalories').textContent = totalCalories + ' kcal';
+                document.getElementById('totalProtein').textContent = totalProtein + 'g';
+                document.getElementById('totalFat').textContent = totalFat + 'g';
+                document.getElementById('totalCarbs').textContent = totalCarbs + 'g';
+                
+                // Calculate exercise needed (1 minute per 10 calories)
+                const exerciseMinutes = Math.round(totalCalories / 10);
+                document.getElementById('exerciseTime').textContent = exerciseMinutes + ' minutes';
+            }
+            
+            // ===== VET CONNECT =====
+            const appointments = [];
+            const appointmentsList = document.getElementById('appointmentsList');
+            
+            document.getElementById('saveAppointmentBtn').addEventListener('click', function() {
+                const vetName = document.getElementById('vetName').value;
+                const clinicName = document.getElementById('clinicName').value;
+                const appointmentDate = document.getElementById('appointmentDate').value;
+                const reason = document.getElementById('appointmentReason').value;
+                
+                if (!vetName || !clinicName || !appointmentDate || !reason) {
+                    showNotification('Please fill all fields', 'warning');
+                    return;
+                }
+                
+                const dateObj = new Date(appointmentDate);
+                const formattedDate = dateObj.toLocaleString('en-US', {
+                    weekday: 'short',
+                    month: 'short',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                // Add appointment
+                const appointment = {
+                    id: Date.now(),
+                    vetName,
+                    clinicName,
+                    date: formattedDate,
+                    reason
+                };
+                
+                appointments.push(appointment);
+                renderAppointments();
+                
+                // Clear form
+                document.getElementById('vetName').value = '';
+                document.getElementById('clinicName').value = '';
+                document.getElementById('appointmentDate').value = '';
+                document.getElementById('appointmentReason').value = '';
+                
+                // Add reminder
+                addReminder('Vet Appointment', formattedDate);
+                
+                showNotification('Appointment booked successfully!', 'success');
+            });
+            
+            function renderAppointments() {
+                appointmentsList.innerHTML = '';
+                
+                appointments.forEach(appointment => {
+                    const appointmentItem = document.createElement('div');
+                    appointmentItem.className = 'appointment-item upcoming';
+                    appointmentItem.innerHTML = `
+                        <h4>${appointment.reason}</h4>
+                        <p>Dr. ${appointment.vetName} - ${appointment.clinicName}</p>
+                        <div class="appointment-details">
+                            <div class="appointment-time">
+                                <i class="fas fa-clock"></i> ${appointment.date}
+                            </div>
+                            <div class="appointment-actions">
+                                <button class="appointment-btn remind" data-id="${appointment.id}">Set Reminder</button>
+                                <button class="appointment-btn delete" data-id="${appointment.id}">Delete</button>
+                            </div>
+                        </div>
+                    `;
+                    appointmentsList.appendChild(appointmentItem);
+                });
+                
+                // Add event listeners to new buttons
+                document.querySelectorAll('.appointment-btn.remind').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        const appointment = appointments.find(a => a.id == id);
+                        if (appointment) {
+                            addReminder('Vet Appointment', appointment.date);
+                            showNotification('Reminder set for appointment!', 'success');
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('.appointment-btn.delete').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        const index = appointments.findIndex(a => a.id == id);
+                        if (index !== -1) {
+                            appointments.splice(index, 1);
+                            renderAppointments();
+                            showNotification('Appointment deleted', 'info');
+                        }
+                    });
+                });
+            }
             
             // ===== REMINDERS SYSTEM =====
             const remindersPanel = document.getElementById('remindersPanel');
@@ -1929,16 +1925,12 @@
                 { 
                     id: 1,
                     title: "Give Rocky medication", 
-                    description: "Heartgard Plus (1 tablet)", 
-                    time: "Today, 8:00 PM",
-                    type: "medication"
+                    time: "Today, 8:00 PM"
                 },
                 { 
                     id: 2,
                     title: "Vet Appointment", 
-                    description: "Annual checkup with Dr. Johnson", 
-                    time: "Tomorrow, 2:00 PM",
-                    type: "appointment"
+                    time: "Tomorrow, 2:00 PM"
                 }
             ];
             
@@ -1954,12 +1946,7 @@
                         </div>
                         <div class="reminder-content">
                             <div class="reminder-title">${reminder.title}</div>
-                            <div class="reminder-desc">${reminder.description}</div>
                             <div class="reminder-time"><i class="fas fa-clock"></i> ${reminder.time}</div>
-                            <div class="reminder-actions">
-                                <button class="reminder-btn snooze" data-id="${reminder.id}">Snooze</button>
-                                <button class="reminder-btn dismiss" data-id="${reminder.id}">Dismiss</button>
-                            </div>
                         </div>
                     `;
                     remindersList.appendChild(reminderItem);
@@ -1975,9 +1962,7 @@
                 const newReminder = {
                     id: Date.now(),
                     title: title,
-                    description: "Appointment reminder",
-                    time: time,
-                    type: "appointment"
+                    time: time
                 };
                 
                 reminders.push(newReminder);
@@ -1994,24 +1979,6 @@
             
             closeReminders.addEventListener('click', function() {
                 remindersPanel.style.display = 'none';
-            });
-            
-            // Snooze and dismiss buttons
-            remindersList.addEventListener('click', function(e) {
-                if (e.target.classList.contains('snooze')) {
-                    const id = e.target.getAttribute('data-id');
-                    showNotification('Reminder snoozed for 1 hour', 'info');
-                }
-                
-                if (e.target.classList.contains('dismiss')) {
-                    const id = e.target.getAttribute('data-id');
-                    const index = reminders.findIndex(r => r.id == id);
-                    if (index !== -1) {
-                        reminders.splice(index, 1);
-                        displayReminders();
-                        showNotification('Reminder dismissed', 'info');
-                    }
-                }
             });
             
             // Show notification function
