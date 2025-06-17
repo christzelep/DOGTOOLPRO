@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PawHealth Pro - Full Version</title>
+    <title>PawHealth Pro - Ultimate Dog Health Tracker</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #4361ee;
             --secondary: #f72585;
             --accent: #4cc9f0;
             --success: #06d6a0;
+            --warning: #ffd166;
+            --danger: #ef476f;
             --light: #f8f9fa;
             --dark: #212529;
             --gray: #6c757d;
@@ -32,9 +34,9 @@
             background: linear-gradient(135deg, #e0f7fa 0%, #f8bbd0 100%);
             color: var(--dark);
             line-height: 1.6;
-            padding: 20px;
             min-height: 100vh;
             overflow-x: hidden;
+            padding: 20px;
         }
         
         .container {
@@ -237,6 +239,23 @@
             align-items: center;
             gap: 8px;
             margin-top: 10px;
+        }
+        
+        .reminder-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--warning);
+            color: #8a6500;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 8px rgba(255, 209, 102, 0.4);
+            animation: pulse 2s infinite;
         }
         
         /* Pet Profile Form */
@@ -906,6 +925,176 @@
             cursor: pointer;
         }
         
+        /* Vet Connect */
+        .vet-connect {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: var(--radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            display: none;
+        }
+        
+        .vet-appointments {
+            margin-top: 20px;
+        }
+        
+        .appointment-item {
+            background: rgba(76, 201, 240, 0.1);
+            border-radius: 16px;
+            padding: 15px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .appointment-item.upcoming {
+            border-left: 4px solid var(--success);
+        }
+        
+        .appointment-item h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+        
+        .appointment-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        
+        .appointment-time {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .appointment-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .appointment-btn {
+            padding: 8px 15px;
+            border-radius: 12px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+        }
+        
+        .appointment-btn.remind {
+            background: var(--warning);
+            color: #8a6500;
+        }
+        
+        .appointment-btn.cancel {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .add-appointment {
+            margin-top: 25px;
+        }
+        
+        /* Reminders Panel */
+        .reminders-panel {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            width: 300px;
+            z-index: 1000;
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        .reminders-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .reminders-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .close-reminders {
+            background: #e9ecef;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .reminder-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .reminder-icon {
+            background: var(--warning);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .reminder-content {
+            flex: 1;
+        }
+        
+        .reminder-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .reminder-time {
+            font-size: 12px;
+            color: var(--gray);
+        }
+        
+        .reminder-actions {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .reminder-btn {
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .reminder-btn.snooze {
+            background: #e9ecef;
+        }
+        
+        .reminder-btn.dismiss {
+            background: var(--danger);
+            color: white;
+        }
+        
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
@@ -932,6 +1121,45 @@
             animation: pulse 2s infinite;
         }
         
+        /* Notification Bell */
+        .notification-bell {
+            position: absolute;
+            top: 20px;
+            right: 80px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            z-index: 100;
+        }
+        
+        .notification-bell:hover {
+            transform: scale(1.1);
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--danger);
+            color: white;
+            font-size: 12px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
         /* Responsive */
         @media (max-width: 480px) {
             .features-grid, 
@@ -949,6 +1177,13 @@
             .pet-stats {
                 justify-content: center;
             }
+            
+            .reminders-panel {
+                width: calc(100% - 40px);
+                left: 20px;
+                right: 20px;
+                top: 20px;
+            }
         }
     </style>
 </head>
@@ -958,6 +1193,25 @@
         <div class="floating-dog">
             <div class="dog-icon">
                 <i class="fas fa-dog"></i>
+            </div>
+        </div>
+        
+        <!-- Notification Bell -->
+        <div class="notification-bell" id="notificationBell">
+            <i class="fas fa-bell"></i>
+            <div class="notification-badge" id="notificationBadge">2</div>
+        </div>
+        
+        <!-- Reminders Panel -->
+        <div class="reminders-panel" id="remindersPanel">
+            <div class="reminders-header">
+                <div class="reminders-title">Reminders</div>
+                <div class="close-reminders" id="closeReminders">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div id="remindersList">
+                <!-- Reminders will be added here dynamically -->
             </div>
         </div>
         
@@ -1002,6 +1256,9 @@
                     Health Score: 92/100
                 </div>
             </div>
+            <div class="reminder-badge" id="reminderBadge">
+                <i class="fas fa-bell"></i> 2 Reminders
+            </div>
         </div>
         
         <!-- Pet Profile Form -->
@@ -1044,6 +1301,18 @@
             <div class="form-group">
                 <label for="petAllergies">Allergies</label>
                 <input type="text" id="petAllergies" placeholder="List any allergies">
+            </div>
+            
+            <div class="form-group">
+                <label for="medicationReminder">Medication Reminder</label>
+                <input type="text" id="medicationReminder" placeholder="Medication name">
+                <input type="time" id="medicationTime" class="mt-2">
+            </div>
+            
+            <div class="form-group">
+                <label for="vetAppointment">Vet Appointment</label>
+                <input type="text" id="vetAppointment" placeholder="Appointment reason">
+                <input type="datetime-local" id="appointmentTime" class="mt-2">
             </div>
             
             <div class="form-buttons">
@@ -1327,13 +1596,13 @@
             </div>
             
             <div class="add-food">
-                <input type="text" id="newFoodInput" placeholder="Add food item and calories">
+                <input type="text" id="newFoodInput" placeholder="Add food item and calories (e.g., Chicken, 120 kcal)">
                 <button id="addFoodBtn"><i class="fas fa-plus"></i></button>
             </div>
         </div>
         
         <!-- Vet Connect -->
-        <div class="dashboard" id="vetConnect">
+        <div class="vet-connect" id="vetConnect">
             <div class="dashboard-header">
                 <div class="dashboard-title">Vet Connect</div>
                 <div class="close-btn" id="closeVetConnect">
@@ -1341,36 +1610,48 @@
                 </div>
             </div>
             
-            <div class="dashboard-content">
-                <div class="dashboard-item">
-                    <h4><i class="fas fa-calendar-check"></i> Upcoming Appointments</h4>
-                    <p>Annual Checkup: January 10, 2024 at 2:00 PM</p>
-                    <p>Vaccination: December 15, 2023 at 10:30 AM</p>
-                </div>
-                
-                <div class="dashboard-item">
-                    <h4><i class="fas fa-user-md"></i> Your Veterinarians</h4>
+            <div class="vet-appointments">
+                <div class="appointment-item upcoming">
+                    <h4><i class="fas fa-calendar-check"></i> Annual Checkup</h4>
                     <p>Dr. Sarah Johnson - Main Street Veterinary</p>
-                    <p>Dr. Michael Chen - Animal Wellness Center</p>
+                    <div class="appointment-details">
+                        <div class="appointment-time">
+                            <i class="fas fa-clock"></i> Tomorrow, 2:00 PM
+                        </div>
+                        <div class="appointment-actions">
+                            <button class="appointment-btn remind">Set Reminder</button>
+                            <button class="appointment-btn cancel">Cancel</button>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="dashboard-item">
-                    <h4><i class="fas fa-phone-alt"></i> Emergency Contacts</h4>
-                    <p>24/7 Emergency Vet: (555) 123-4567</p>
-                    <p>Animal Poison Control: (888) 426-4435</p>
+                <div class="appointment-item">
+                    <h4><i class="fas fa-syringe"></i> Vaccination</h4>
+                    <p>Dr. Michael Chen - Animal Wellness Center</p>
+                    <div class="appointment-details">
+                        <div class="appointment-time">
+                            <i class="fas fa-clock"></i> Dec 15, 2023 at 10:30 AM
+                        </div>
+                        <div class="appointment-actions">
+                            <button class="appointment-btn remind">Set Reminder</button>
+                            <button class="appointment-btn cancel">Cancel</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <button class="start-button" style="margin-top: 20px;">
-                <i class="fas fa-calendar-plus"></i> Book New Appointment
-            </button>
+            <div class="add-appointment">
+                <button class="start-button">
+                    <i class="fas fa-calendar-plus"></i> Book New Appointment
+                </button>
+            </div>
         </div>
     </div>
 
     <script>
         // Initialize functionality
         document.addEventListener('DOMContentLoaded', function() {
-            // Pet profile functionality
+            // ===== PET PROFILE FUNCTIONALITY =====
             const petProfileSection = document.getElementById('petProfileSection');
             const profileForm = document.getElementById('profileForm');
             
@@ -1394,7 +1675,8 @@
                 profileForm.style.display = 'none';
                 petProfileSection.style.display = 'flex';
                 
-                alert('Profile saved successfully!');
+                // Show confirmation
+                showNotification('Profile updated successfully!', 'success');
             });
             
             document.getElementById('cancelProfileBtn').addEventListener('click', function() {
@@ -1402,7 +1684,7 @@
                 petProfileSection.style.display = 'flex';
             });
             
-            // Feature navigation
+            // ===== FEATURE NAVIGATION =====
             const features = {
                 healthDashboard: document.getElementById('healthDashboard'),
                 hydrationTracker: document.getElementById('hydrationTracker'),
@@ -1460,16 +1742,20 @@
                 hideAllFeatures();
                 
                 // Show the selected feature
-                features[featureName].style.display = 'block';
+                if (features[featureName]) {
+                    features[featureName].style.display = 'block';
+                }
             }
             
             function hideAllFeatures() {
                 for (const feature in features) {
-                    features[feature].style.display = 'none';
+                    if (features[feature]) {
+                        features[feature].style.display = 'none';
+                    }
                 }
             }
             
-            // Hydration Tracker
+            // ===== HYDRATION TRACKER =====
             let waterAmount = 650;
             const waterAmountElement = document.getElementById('waterAmount');
             const hydrationProgress = document.getElementById('hydrationProgress');
@@ -1479,7 +1765,7 @@
                 waterAmountElement.textContent = `${waterAmount} ml`;
                 const percent = Math.min(100, Math.round((waterAmount / 1500) * 100));
                 hydrationProgress.style.width = `${percent}%`;
-                document.querySelector('.progress-percent').textContent = `${percent}%`;
+                document.querySelector('.hydration .progress-percent').textContent = `${percent}%`;
             }
             
             document.getElementById('plusWater').addEventListener('click', function() {
@@ -1496,11 +1782,16 @@
                     <div class="history-amount">+100 ml</div>
                 `;
                 historyList.prepend(historyItem);
+                
+                // Show notification if goal reached
+                if (waterAmount >= 1500) {
+                    showNotification('Hydration goal achieved! Great job!', 'success');
+                }
             });
             
             document.getElementById('minusWater').addEventListener('click', function() {
                 if (waterAmount > 0) {
-                    waterAmount -= 100;
+                    waterAmount = Math.max(0, waterAmount - 100);
                     updateHydration();
                     
                     // Add to history
@@ -1516,7 +1807,7 @@
                 }
             });
             
-            // Symptom Scanner
+            // ===== SYMPTOM SCANNER =====
             const symptomOptions = document.querySelectorAll('.symptom-option');
             symptomOptions.forEach(option => {
                 option.addEventListener('click', function() {
@@ -1527,49 +1818,254 @@
             document.getElementById('scanSymptomsBtn').addEventListener('click', function() {
                 const selectedSymptoms = document.querySelectorAll('.symptom-option.selected');
                 if (selectedSymptoms.length > 0) {
+                    const originalHTML = this.innerHTML;
                     this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing...';
                     
                     setTimeout(() => {
-                        this.innerHTML = '<i class="fas fa-diagnoses"></i> Analyze Symptoms';
+                        this.innerHTML = originalHTML;
                         document.getElementById('scanResult').style.display = 'block';
+                        
+                        // Show notification
+                        showNotification('Symptom analysis complete!', 'info');
                     }, 1500);
                 } else {
-                    alert('Please select at least one symptom.');
+                    showNotification('Please select at least one symptom.', 'warning');
                 }
             });
             
-            // Walk Tracker
+            // ===== WALK TRACKER =====
             document.getElementById('startWalkBtn').addEventListener('click', function() {
+                const originalHTML = this.innerHTML;
                 this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Starting...';
                 
                 setTimeout(() => {
                     this.innerHTML = '<i class="fas fa-walking"></i> Walk in Progress';
-                    alert('GPS Walk Tracking started! Distance and calories will update in real-time.');
+                    
+                    // Show notification
+                    showNotification('Walk tracking started!', 'success');
+                    
+                    // Simulate walk tracking
+                    let distance = 0;
+                    let minutes = 0;
+                    let calories = 0;
+                    
+                    const interval = setInterval(() => {
+                        distance += 0.1;
+                        minutes++;
+                        calories += 5;
+                        
+                        document.querySelector('.walk-stat:nth-child(1) .value').textContent = distance.toFixed(1);
+                        document.querySelector('.walk-stat:nth-child(2) .value').textContent = minutes;
+                        document.querySelector('.walk-stat:nth-child(3) .value').textContent = calories;
+                        
+                        if (minutes >= 42) {
+                            clearInterval(interval);
+                            this.innerHTML = '<i class="fas fa-stop"></i> End Walk';
+                            this.onclick = function() {
+                                clearInterval(interval);
+                                this.innerHTML = '<i class="fas fa-play"></i> Start New Walk';
+                                this.onclick = arguments.callee;
+                                showNotification('Walk completed! Good job!', 'success');
+                            };
+                        }
+                    }, 1000);
                 }, 1000);
             });
             
-            // Food Tracker
+            // ===== FOOD TRACKER =====
             document.getElementById('addFoodBtn').addEventListener('click', function() {
                 const input = document.getElementById('newFoodInput');
                 if (input.value.trim() !== '') {
                     const foodLog = document.querySelector('.food-log');
                     
+                    // Parse food and calories
+                    const foodParts = input.value.split(',');
+                    const foodName = foodParts[0] || 'New Food';
+                    const calories = foodParts[1] ? foodParts[1].trim() + ' kcal' : '0 kcal';
+                    
                     const newFood = document.createElement('div');
                     newFood.className = 'food-item';
                     newFood.innerHTML = `
                         <div class="food-info">
-                            <h4>New Food</h4>
+                            <h4>${foodName}</h4>
                             <p>${input.value}</p>
                         </div>
-                        <div class="food-calories">0 kcal</div>
+                        <div class="food-calories">${calories}</div>
                     `;
                     
                     foodLog.appendChild(newFood);
                     input.value = '';
                     
-                    alert('Food item added! Remember to update calories.');
+                    // Show notification
+                    showNotification('Food item added!', 'success');
                 }
             });
+            
+            // ===== VET CONNECT =====
+            document.querySelectorAll('.appointment-btn.remind').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const appointmentItem = this.closest('.appointment-item');
+                    const title = appointmentItem.querySelector('h4').textContent;
+                    const time = appointmentItem.querySelector('.appointment-time').textContent;
+                    
+                    // Add to reminders
+                    addReminder(title, time);
+                    
+                    // Show notification
+                    showNotification('Reminder set for appointment!', 'success');
+                });
+            });
+            
+            // ===== REMINDERS SYSTEM =====
+            const remindersPanel = document.getElementById('remindersPanel');
+            const notificationBell = document.getElementById('notificationBell');
+            const notificationBadge = document.getElementById('notificationBadge');
+            const remindersList = document.getElementById('remindersList');
+            const closeReminders = document.getElementById('closeReminders');
+            const reminderBadge = document.getElementById('reminderBadge');
+            
+            // Sample reminders
+            const reminders = [
+                { 
+                    id: 1,
+                    title: "Give Rocky medication", 
+                    description: "Heartgard Plus (1 tablet)", 
+                    time: "Today, 8:00 PM",
+                    type: "medication"
+                },
+                { 
+                    id: 2,
+                    title: "Vet Appointment", 
+                    description: "Annual checkup with Dr. Johnson", 
+                    time: "Tomorrow, 2:00 PM",
+                    type: "appointment"
+                }
+            ];
+            
+            // Display reminders
+            function displayReminders() {
+                remindersList.innerHTML = '';
+                reminders.forEach(reminder => {
+                    const reminderItem = document.createElement('div');
+                    reminderItem.className = 'reminder-item';
+                    reminderItem.innerHTML = `
+                        <div class="reminder-icon">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <div class="reminder-content">
+                            <div class="reminder-title">${reminder.title}</div>
+                            <div class="reminder-desc">${reminder.description}</div>
+                            <div class="reminder-time"><i class="fas fa-clock"></i> ${reminder.time}</div>
+                            <div class="reminder-actions">
+                                <button class="reminder-btn snooze" data-id="${reminder.id}">Snooze</button>
+                                <button class="reminder-btn dismiss" data-id="${reminder.id}">Dismiss</button>
+                            </div>
+                        </div>
+                    `;
+                    remindersList.appendChild(reminderItem);
+                });
+                
+                // Update badge count
+                notificationBadge.textContent = reminders.length;
+                reminderBadge.innerHTML = `<i class="fas fa-bell"></i> ${reminders.length} Reminders`;
+            }
+            
+            // Add new reminder
+            function addReminder(title, time) {
+                const newReminder = {
+                    id: Date.now(),
+                    title: title,
+                    description: "Appointment reminder",
+                    time: time,
+                    type: "appointment"
+                };
+                
+                reminders.push(newReminder);
+                displayReminders();
+                
+                // Show notification
+                showNotification('New reminder added!', 'info');
+            }
+            
+            // Event listeners
+            notificationBell.addEventListener('click', function() {
+                remindersPanel.style.display = 'block';
+            });
+            
+            closeReminders.addEventListener('click', function() {
+                remindersPanel.style.display = 'none';
+            });
+            
+            // Snooze and dismiss buttons
+            remindersList.addEventListener('click', function(e) {
+                if (e.target.classList.contains('snooze')) {
+                    const id = e.target.getAttribute('data-id');
+                    showNotification('Reminder snoozed for 1 hour', 'info');
+                }
+                
+                if (e.target.classList.contains('dismiss')) {
+                    const id = e.target.getAttribute('data-id');
+                    const index = reminders.findIndex(r => r.id == id);
+                    if (index !== -1) {
+                        reminders.splice(index, 1);
+                        displayReminders();
+                        showNotification('Reminder dismissed', 'info');
+                    }
+                }
+            });
+            
+            // Show notification function
+            function showNotification(message, type) {
+                // Create notification element
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.innerHTML = `
+                    <div class="notification-content">
+                        <i class="fas fa-bell"></i>
+                        ${message}
+                    </div>
+                `;
+                
+                // Add to body
+                document.body.appendChild(notification);
+                
+                // Position and animate
+                notification.style.position = 'fixed';
+                notification.style.top = '20px';
+                notification.style.right = '20px';
+                notification.style.padding = '15px 20px';
+                notification.style.background = type === 'success' ? 'rgba(6, 214, 160, 0.9)' : 
+                                               type === 'warning' ? 'rgba(255, 209, 102, 0.9)' : 
+                                               type === 'danger' ? 'rgba(239, 71, 111, 0.9)' : 
+                                               'rgba(67, 97, 238, 0.9)';
+                notification.style.color = 'white';
+                notification.style.borderRadius = '12px';
+                notification.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+                notification.style.zIndex = '1000';
+                notification.style.transform = 'translateX(100%)';
+                notification.style.transition = 'transform 0.3s ease';
+                
+                // Animate in
+                setTimeout(() => {
+                    notification.style.transform = 'translateX(0)';
+                }, 10);
+                
+                // Remove after delay
+                setTimeout(() => {
+                    notification.style.transform = 'translateX(100%)';
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 300);
+                }, 3000);
+            }
+            
+            // Initialize reminders
+            displayReminders();
+            
+            // Simulate medication reminder
+            setTimeout(() => {
+                showNotification('Time to give Rocky his medication!', 'warning');
+            }, 5000);
         });
     </script>
 </body>
